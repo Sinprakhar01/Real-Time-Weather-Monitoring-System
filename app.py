@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 # config
-API_KEY = '14a91cf73454cf0e08aa8d5688c206ea'
+API_KEY = 'YOUR_API_KEY'
 REFRESH_TIME=5 #In minutes
 ALERT_THRESHOLD=20 
 DB_USERNAME='root'
