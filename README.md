@@ -56,8 +56,7 @@
         <pre><code>git clone https://github.com/username/realtime-weather-monitoring-system.git
 cd realtime-weather-monitoring-system</code></pre>
     </li>
-    <li><strong>Set Up MySQL Database in Docker</strong>
-        <pre><code>docker run --name weather_db -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=weather_db -v $(pwd)/init.sql:/docker-entrypoint-initdb.d/init.sql -p 3306:3306 -d mysql:latest</code></pre>
+    <li>
         <p>This command will:</p>
         <ul>
             <li>Create a MySQL container with the database <code>weather_db</code> on <code>localhost:3306</code>.</li>
