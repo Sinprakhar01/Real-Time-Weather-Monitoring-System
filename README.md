@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Weather Monitoring System - README</title>
 </head>
 <body>
 
@@ -26,6 +27,7 @@
 <ol>
     <li><a href="#dependencies">Dependencies</a></li>
     <li><a href="#setup-instructions">Setup Instructions</a></li>
+    <li><a href="#database-setup">Database Setup</a></li>
     <li><a href="#running-the-application">Running the Application</a></li>
     <li><a href="#api-and-alert-thresholds">API and Alert Thresholds</a></li>
     <li><a href="#design-choices">Design Choices</a></li>
@@ -45,6 +47,9 @@
 <p>Install them with:</p>
 <pre><code>pip install flask flask_sqlalchemy apscheduler requests pymysql</code></pre>
 
+<h3>Docker</h3>
+<p>To set up the MySQL database, Docker is used. Ensure you have Docker installed.</p>
+
 <h3>API Key</h3>
 <p>Get an API key from <a href="https://home.openweathermap.org/users/sign_up">OpenWeatherMap</a> and replace <code>API_KEY</code> in <code>app.py</code>.</p>
 
@@ -55,7 +60,38 @@
         <pre><code>git clone https://github.com/username/realtime-weather-monitoring-system.git
 cd realtime-weather-monitoring-system</code></pre>
     </li>
-        <p>This will create a MySQL database named <code>weather_db</code> on <code>localhost:3306</code>.</p>
+    <li><strong>Set Up MySQL Database in Docker</strong>
+        <pre><code>docker run --name weather_db -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=weather_db -v $(pwd)/init.sql:/docker-entrypoint-initdb.d/init.sql -p 3306:3306 -d mysql:latest</code></pre>
+        <p>This command will:</p>
+        <ul>
+            <li>Create a MySQL container with the database <code>weather_db</code> on <code>localhost:3306</code>.</li>
+            <li>Run <code>init.sql</code> on startup to create the required tables.</li>
+        </ul>
+        <p>Ensure the <code>init.sql</code> file has the following content:</p>
+        <pre><code>
+CREATE DATABASE IF NOT EXISTS weather_db;
+
+USE weather_db;
+
+CREATE TABLE daily_weather_summary (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    city VARCHAR(50),
+    date DATE,
+    avg_temp DECIMAL(5, 2),
+    max_temp DECIMAL(5, 2),
+    min_temp DECIMAL(5, 2),
+    dominant_weather VARCHAR(50),
+    feels_like DECIMAL(5,2)
+);
+
+CREATE TABLE alerts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    city VARCHAR(50),
+    message VARCHAR(50),
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+        </code></pre>
+    </li>
     <li><strong>Update Configurations in <code>app.py</code></strong>
         <p>In <code>app.py</code>, update the following variables as needed:</p>
         <pre><code>API_KEY = 'your_openweathermap_api_key'
@@ -63,10 +99,6 @@ DB_USERNAME = 'root'
 DB_PASSWORD = 'root'
 REFRESH_TIME = 300  # Refresh interval in seconds
 ALERT_THRESHOLD = 20  # Threshold temperature for alerts</code></pre>
-    </li>
-    <li><strong>Initialize Database Tables</strong>
-        <pre><code>python app.py</code></pre>
-        <p>This will create the tables defined in <code>app.py</code>.</p>
     </li>
 </ol>
 
