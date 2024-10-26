@@ -45,9 +45,6 @@
 <p>Install them with:</p>
 <pre><code>pip install flask flask_sqlalchemy apscheduler requests pymysql</code></pre>
 
-<h3>Docker</h3>
-<p>To set up the MySQL database, Docker is used. Ensure you have Docker installed.</p>
-
 <h3>API Key</h3>
 <p>Get an API key from <a href="https://home.openweathermap.org/users/sign_up">OpenWeatherMap</a> and replace <code>API_KEY</code> in <code>app.py</code>.</p>
 
