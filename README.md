@@ -63,7 +63,6 @@ cd realtime-weather-monitoring-system</code></pre>
             <li>Run <code>init.sql</code> on startup to create the required tables.</li>
         </ul>
         <p>Ensure the <code>init.sql</code> file has the following content:</p>
-        <li>
     <li><strong>Update Configurations in <code>app.py</code></strong>
         <p>In <code>app.py</code>, update the following variables as needed:</p>
         <pre><code>API_KEY = 'your_openweathermap_api_key'
