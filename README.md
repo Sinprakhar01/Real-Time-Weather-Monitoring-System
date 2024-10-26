@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time Weather Monitoring System - README</title>
 </head>
 <body>
 
@@ -47,9 +46,6 @@
 <p>Install them with:</p>
 <pre><code>pip install flask flask_sqlalchemy apscheduler requests pymysql</code></pre>
 
-<h3>Docker</h3>
-<p>To set up the MySQL database, Docker is used. Ensure you have Docker installed.</p>
-
 <h3>API Key</h3>
 <p>Get an API key from <a href="https://home.openweathermap.org/users/sign_up">OpenWeatherMap</a> and replace <code>API_KEY</code> in <code>app.py</code>.</p>
 
@@ -68,30 +64,7 @@ cd realtime-weather-monitoring-system</code></pre>
             <li>Run <code>init.sql</code> on startup to create the required tables.</li>
         </ul>
         <p>Ensure the <code>init.sql</code> file has the following content:</p>
-        <pre><code>
-CREATE DATABASE IF NOT EXISTS weather_db;
-
-USE weather_db;
-
-CREATE TABLE daily_weather_summary (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    city VARCHAR(50),
-    date DATE,
-    avg_temp DECIMAL(5, 2),
-    max_temp DECIMAL(5, 2),
-    min_temp DECIMAL(5, 2),
-    dominant_weather VARCHAR(50),
-    feels_like DECIMAL(5,2)
-);
-
-CREATE TABLE alerts (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    city VARCHAR(50),
-    message VARCHAR(50),
-    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-        </code></pre>
-    </li>
+        <li>
     <li><strong>Update Configurations in <code>app.py</code></strong>
         <p>In <code>app.py</code>, update the following variables as needed:</p>
         <pre><code>API_KEY = 'your_openweathermap_api_key'
