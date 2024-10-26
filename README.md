@@ -55,10 +55,7 @@
         <pre><code>git clone https://github.com/username/realtime-weather-monitoring-system.git
 cd realtime-weather-monitoring-system</code></pre>
     </li>
-    <li><strong>Set Up MySQL Database in Docker</strong>
-        <pre><code>docker run --name weather_db -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=weather_db -p 3306:3306 -d mysql:latest</code></pre>
         <p>This will create a MySQL database named <code>weather_db</code> on <code>localhost:3306</code>.</p>
-    </li>
     <li><strong>Update Configurations in <code>app.py</code></strong>
         <p>In <code>app.py</code>, update the following variables as needed:</p>
         <pre><code>API_KEY = 'your_openweathermap_api_key'
